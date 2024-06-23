@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Flex, Text, useColorModeValue, Select } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import StackedBarChartAcc from "../../../../components/charts/violence/StackedBarChartAcc.js";

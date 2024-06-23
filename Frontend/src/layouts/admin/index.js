@@ -7,8 +7,7 @@ import { SidebarContext } from '../../contexts/SidebarContext.js';
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import routes from '../../routes.js';
-import Admin from '../../pages/admin/default/index.jsx';
-import Profile from '../../pages/admin/profile/index.jsx';
+
 import Health from '../../pages/admin/health/index.jsx';
 import Security from '../../pages/admin/security/index.jsx';
 import Violence from '../../pages/admin/violence/index.jsx';
@@ -155,11 +154,7 @@ export default function Dashboard(props) {
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Routes>
 									{getRoutes(routes)}
-									<Route path="/default" element={<Admin />} />
-									<Route path="/profile" element={<Profile />} />
-									<Route path="/demography" element={<Admin />} />
 									<Route path="/health" element={<Health />} />
-									<Route path="/education" element={<Admin />} />
 									<Route path="/security" element={<Security />} />
 									<Route path="/violence" element={<Violence />} />
 									

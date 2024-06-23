@@ -32,7 +32,7 @@ export default function ViolenceReports() {
   const [dataDesplazados, setDataDesplazados] = useState([]);
 
   // Constants
-  const center = [2.283333, -76.85];
+  //mapa const center = [2.283333, -76.85];
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
@@ -110,7 +110,7 @@ export default function ViolenceReports() {
               }
             />
           }
-          name={`oli`}
+          name={`card`}
           value={2020}
         />
         <MiniStatistics

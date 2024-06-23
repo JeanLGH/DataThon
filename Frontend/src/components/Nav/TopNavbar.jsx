@@ -70,11 +70,7 @@ export default function TopNavbar() {
             </li>
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
-            <li className="semiBold font15 pointer">
-              <a href="/login" style={{ padding: "10px 30px 10px 0" }}>
-                Inicio de sesión
-              </a>
-            </li>
+
             <li className="semiBold font15 pointer flexCenter">
               <a href="/demography" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
                 Empezar sin cuenta

@@ -2,11 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Register from "./pages/register";
-import Login from "./pages/login";
 import { ChakraProvider } from '@chakra-ui/react';
-import Profile from './pages/admin/profile';
-import Accessibility from './pages/accessibility';
 import AdminLayout from './layouts/admin';
 import Health from './layouts/admin';
 import Security from  './layouts/admin';
@@ -33,29 +29,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
     path: "/demography",
     element: <Demography />,
   },
   {
     path: "/security",
     element: <Security />,
-  },
-  {
-    path: "/accessibility",
-    element: <Accessibility />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-   
   },
   {
     path: "/admin/*",

@@ -87,12 +87,12 @@ export default () => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0 custom-text-white" style={{ width: '100%' }}> {/* Ajusta el ancho del contenido al 100% del Sidebar */}
-              <NavItem title="Inicio" icon={faHouse} link="/" />
+      
               <NavItem title="Gráficas" icon={faChartPie} link="/graficas" />
               <CollapsableNavItem eventKey="documentation/" title="Indicadores" icon={faChartSimple}>
                 <NavItem title="Demografía" icon={faUserFriends} link="/demography" />
                 <NavItem title="Salud" icon={faHeart} link="/health" />
-                <NavItem title="Educación" icon={faBook} link="/educacion" />
+          
                 <NavItem title="Seguridad" icon={faHandshake} link="/seguridad" />
                 <NavItem title="Medio Ambiente" icon={faTree} link="/medio-ambiente" />
                 <NavItem title="Finanzas Municipales" icon={faMoneyBillAlt} link="/finanzas-municipales" />
@@ -100,7 +100,6 @@ export default () => {
               <CollapsableNavItem eventKey="components/" title="Configuración" icon={faGear}>
                 <NavItem title="Usuario" icon={faCircleUser} link="/information" />
                 <NavItem title="Seguridad" icon={faShieldHalved} link="/security" />
-                <NavItem title="Accesibilidad" icon={faUniversalAccess} link="/accessibility" />
               </CollapsableNavItem>
             </Nav>
           </div>

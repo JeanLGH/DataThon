@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Polygon, Popup, Marker, CircleMarker } from 'react-leaflet'; // Importa CircleMarker
+import { Polygon, Popup, CircleMarker } from 'react-leaflet'; // Importa CircleMarker
 import '../../styles/PopupStyles.css';
-import { Icon } from 'leaflet';
 
 const PolygonComponent = ({ state, mousePosition, setMousePosition }) => {
   const coordinates = state.geometry.coordinates[0].map((item) => [item[1], item[0]]);

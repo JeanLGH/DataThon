@@ -5,7 +5,6 @@ import {
   SimpleGrid,
   useColorModeValue,
   AspectRatio,
-  Select,
 } from "@chakra-ui/react";
 import '../../../assets/css/App.css';
 import MiniStatistics from "../../../components/card/MiniStatistics";

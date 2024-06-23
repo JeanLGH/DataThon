@@ -82,14 +82,7 @@ export const SidebarData = [
         path: '/security',
         icon: <MdIcons.MdOutlineSecurity />,
         cName: 'sub-nav'
-      },
-      {
-        title: 'Accesibilidad',
-        path: '/accessibility',
-        icon: <RxIcons.RxAccessibility  />,
-        cName: 'sub-nav'
-      },
-      // Agrega más opciones según sea necesario
+      }
     ]
   },
   {

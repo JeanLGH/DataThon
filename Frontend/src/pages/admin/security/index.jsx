@@ -5,14 +5,13 @@ import {
   SimpleGrid,
   useColorModeValue,
   AspectRatio,
-  Select,
 } from "@chakra-ui/react";
 import '../../../assets/css/App.css';
 import MiniStatistics from "../../../components/card/MiniStatistics";
 import IconBox from "../../../components/icons/IconBox";
 import { BsGenderMale, BsGenderFemale } from "react-icons/bs";
 //mapa
-import MapComponent from "../../../components/MapComponents/MapComponent";
+//import MapComponent from "../../../components/MapComponents/MapComponent";
 //accesos carnales
 import TotalAccesosCarnales from "../../admin/security/components/TotalAccesosCarnales";
 //homicidios
@@ -30,7 +29,7 @@ import TotalViolenciaIntrafamiliar from "../../admin/security/components/TotalVi
 export default function SecurityReports() {
 
   // Mapa
-  const [mousePosition, setMousePosition] = useState(null);
+ // const [mousePosition, setMousePosition] = useState(null);
 
   //acceos carnales
   const [dataAccesos, setDataAccesos] = useState([]);
@@ -50,7 +49,7 @@ export default function SecurityReports() {
    const [dataViolenciaIntrafamiliar, setDataViolenciaIntrafamiliar] = useState([]);
 
   // Constants
-  const center = [2.283333, -76.85];
+  //mapa const center = [2.283333, -76.85];
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
@@ -163,7 +162,7 @@ export default function SecurityReports() {
               }
             />
           }
-          name={`oli`}
+          name={`card`}
           value={2020}
         />
         <MiniStatistics

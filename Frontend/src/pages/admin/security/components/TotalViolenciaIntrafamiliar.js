@@ -1,5 +1,5 @@
 // TotalViolenciaIntrafamiliar.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Flex, Select, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import PieChartAcc from "../../../../components/charts/security/PieChartAcc.js";
