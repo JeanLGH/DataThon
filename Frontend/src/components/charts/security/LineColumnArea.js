@@ -31,95 +31,93 @@ const ClimaChart = ({ data }) => {
   const series = [
     {
       name: 'Temperatura Máxima',
-      data: datosMensuales.map(item => item.tmax.toFixed(1)) // Ajustar a un decimal
+      type: 'line',
+      data: datosMensuales.map(item => item.tmax)
     },
     {
       name: 'Temperatura Mínima',
-      data: datosMensuales.map(item => item.tmin.toFixed(1)) // Ajustar a un decimal
+      type: 'line',
+      data: datosMensuales.map(item => item.tmin)
     },
     {
       name: 'Temperatura Promedio',
-      data: datosMensuales.map(item => item.tavg.toFixed(1)) // Ajustar a un decimal
+      type: 'line',
+      data: datosMensuales.map(item => item.tavg)
     },
     {
       name: 'Precipitación',
-      data: datosMensuales.map(item => item.prcp.toFixed(1)) // Ajustar a un decimal
+      type: 'column',
+      data: datosMensuales.map(item => item.prcp)
     }
   ];
 
   const options = {
     chart: {
-      type: 'bar',
       height: 350,
+      type: 'line',
       stacked: false,
+    },
+    stroke: {
+      width: [3, 3, 3, 0],
+      curve: 'smooth'
     },
     plotOptions: {
       bar: {
-        horizontal: false,
-        columnWidth: '55%',
-        endingShape: 'rounded'
-      },
+        columnWidth: '50%'
+      }
     },
-    dataLabels: {
-      enabled: false
+    fill: {
+      opacity: [1, 1, 1, 0.8],
     },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ['transparent']
+    labels: datosMensuales.map(item => {
+      const [year, month] = item.fecha.split('-');
+      return `${['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][parseInt(month) - 1]} '${year.slice(2)}`;
+    }),
+    markers: {
+      size: 0
     },
     xaxis: {
-      categories: datosMensuales.map(item => {
-        const [year, month] = item.fecha.split('-');
-        return `${year}-${month.padStart(2, '0')}`;
-      }),
-      title: {
-        text: 'Mes'
-      }
+      type: 'category'
     },
     yaxis: [
       {
         title: {
-          text: 'Temperatura (°C)'
+          text: 'Temperatura (°C)',
         },
-        labels: {
-          formatter: function (value) {
-            return value.toFixed(1); // Ajustar a un decimal
-          }
-        }
+        min: 0,
+        max: 40,
+        decimalsInFloat: 1,
       },
       {
         opposite: true,
         title: {
           text: 'Precipitación (mm)'
         },
-        labels: {
-          formatter: function (value) {
-            return value.toFixed(1); // Ajustar a un decimal
-          }
-        }
+        min: 0,
+        max: 700,
+        decimalsInFloat: 0,
       }
     ],
     tooltip: {
       shared: true,
       intersect: false,
       y: {
-        formatter: function (val, { seriesIndex }) {
-          if (seriesIndex === 3) {
-            return val.toFixed(1) + " mm";
+        formatter: function (y, { seriesIndex }) {
+          if (typeof y !== "undefined") {
+            return seriesIndex === 3 ? y.toFixed(1) + " mm" : y.toFixed(1) + " °C";
           }
-          return val.toFixed(1) + " °C";
+          return y;
         }
       }
     },
     legend: {
       position: 'top'
     },
-    colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560']
+    colors: ['#FF4560', '#00E396', '#FEB019', '#008FFB']
   };
 
   return (
-    <Chart options={options} series={series} type="bar" height={350} />
+    <Chart options={options} series={series} type="line" height={350} />
   );
 };
 

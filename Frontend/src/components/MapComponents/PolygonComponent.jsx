@@ -8,23 +8,7 @@ const PolygonComponent = ({ state, mousePosition, setMousePosition }) => {
   const [totalPoblacion, setTotalPoblacion] = useState(null);
   const [maxPoblacion, setMaxPoblacion] = useState(0);
 
-  useEffect(() => {
-    const fetchTotalPoblacion = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/datos2022Poblacion');
-        if (!response.ok) {
-          throw new Error('Error al obtener los datos del servidor');
-        }
-        const data = await response.json();
-        setTotalPoblacion(data);
-        const maxPoblacionValue = Math.max(...data.map(item => item.Poblacion_DANE));
-        setMaxPoblacion(maxPoblacionValue);
-      } catch (error) {
-        console.error('Error al obtener el total de población:', error);
-      }
-    };
-    fetchTotalPoblacion();
-  }, []);
+
 
   const mapPolygonColorToDensity = (density) => {
     const percentage = (density / maxPoblacion) * 100;

@@ -19,27 +19,7 @@ const LegendDrawer = () => {
         arr.map((mapObj) => mapObj[prop]).indexOf(obj[prop]) === index
     );
 
-  useEffect(() => {
-    const fetchLegendData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/datos2022Poblacion');
-        if (!response.ok) {
-          throw new Error('Error al obtener los datos de la leyenda del servidor');
-        }
-        const data = await response.json();
-        // Filtra los datos para incluir solo los municipios deseados
-        const filteredData = data.filter(item =>
-          ["Santander De Quilichao", "Guachené", "Puerto Tejada"].includes(item.MunicipioAS)
-        );
-        // Elimina los duplicados
-        const uniqueData = removeDuplicates(filteredData, "MunicipioAS");
-        setLegendData(uniqueData);
-      } catch (error) {
-        console.error('Error al obtener los datos de la leyenda:', error);
-      }
-    };
-    fetchLegendData();
-  }, []);
+  
 
   return (
     <div className="legend-drawer">

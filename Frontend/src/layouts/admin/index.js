@@ -154,8 +154,8 @@ export default function Dashboard(props) {
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Routes>
 									{getRoutes(routes)}
-									<Route path="/health" element={<Health />} />
-									<Route path="/security" element={<Security />} />
+									<Route path="/clima" element={<Health />} />
+									<Route path="/dengue" element={<Security />} />
 									<Route path="/violence" element={<Violence />} />
 									
 								</Routes>

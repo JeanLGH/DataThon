@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
-import { Box, Flex, Select, Text, useColorModeValue } from "@chakra-ui/react";
-import Card from "../../../../components/card/Card.js";
 
 const DengueBarChart = ({ data }) => {
   const [chartData, setChartData] = useState({ series: [], categories: [] });
@@ -50,7 +48,7 @@ const DengueBarChart = ({ data }) => {
     },
     plotOptions: {
       bar: {
-        horizontal: true,
+        horizontal: false,
         columnWidth: '55%',
         endingShape: 'rounded',
       },
@@ -82,14 +80,7 @@ const DengueBarChart = ({ data }) => {
 
   return (
     <div id="chart">
-      <Card align="center" direction="column" w="100%" >
-      <Flex align="center" w="100%" px="15px" py="10px">
-        <Text me="auto" fontSize="xl" fontWeight="700" lineHeight="100%">
-          Casos por género
-        </Text>
-      </Flex>
-        <Chart options={options} series={chartData.series} type="bar" height={400} />
-      </Card>
+      <Chart options={options} series={chartData.series} type="bar" height={400} />
     </div>
   );
 };

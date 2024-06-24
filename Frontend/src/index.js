@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <Demography />,
   },
   {
-    path: "/security",
+    path: "/dengue",
     element: <Security />,
   },
   {
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
    
   },
   {
-    path: "/health",
+    path: "/clima",
     element: <Health />,
    
   },

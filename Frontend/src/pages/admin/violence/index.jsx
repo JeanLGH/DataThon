@@ -37,60 +37,7 @@ export default function ViolenceReports() {
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
 
 
-  useEffect(() => {
-    // Fetch data Desplazamientos forzados
-    const fetchDataDesplazados = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/desplazamientoForzado");
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos del servidor");
-        }
-        const data = await response.json();
-        setDataDesplazados(data);
-      } catch (error) {
-        console.error("Error al obtener los datos del servidor:", error);
-      }
-    };
-    fetchDataDesplazados();
-  }, []);
 
-
-  //Muertes Violentas
-  useEffect(() => {
-
-    const fetchmuertesViolentasData = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/muertesViolentasTotal");
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos del servidor");
-        }
-        const data = await response.json();
-        setMuertesViolentasData(data);
-      } catch (error) {
-        console.error("Error al obtener los datos del servidor:", error);
-      }
-    };
-    fetchmuertesViolentasData();
-  }, []);
-
-
-
-  useEffect(() => {
-    const fetchDataConflictosArmados = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/conflictosArmados");
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos del servidor");
-        }
-        const data = await response.json();
-        setConflictosArmadosData(data);
-      } catch (error) {
-        console.error("Error al obtener los datos del servidor:", error);
-      }
-    };
-
-    fetchDataConflictosArmados();
-  }, []);
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>

@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
-const SlopeChart = ({ data, year }) => {
+const SlopeChart = ({ data }) => {
   const [chartOptions, setChartOptions] = useState({});
   const [chartSeries, setChartSeries] = useState([]);
 
   useEffect(() => {
-    // Determinar sufijo de columnas basado en el año
-    const suffix = year === '2022' ? 'NA22' : 'NA21';
-
     // Transformar los datos para el gráfico
-    const categories = [...new Set(data.map(d => d[`municipio${suffix}`]))];
+    const categories = data.map(d => d.month); // Usamos el mes como categorías
     const series = [
       {
-        name: 'Hombres',
-        data: data.map(d => ({ x: d[`municipio${suffix}`], y: d[`hombres${suffix}`] }))
+        name: 'Promedio Precipitación',
+        data: data.map(d => d.prcp.toFixed(2)) // Redondeamos a 2 decimales
       },
       {
-        name: 'Mujeres',
-        data: data.map(d => ({ x: d[`municipio${suffix}`], y: d[`mujeres${suffix}`] }))
-      },
-      {
-        name: 'Indeterminado',
-        data: data.map(d => ({ x: d[`municipio${suffix}`], y: d[`indeterminado${suffix}`] }))
+        name: 'Promedio Temperatura Promedio',
+        data: data.map(d => d.tavg.toFixed(2)) // Redondeamos a 2 decimales
       }
     ];
 
@@ -31,7 +24,7 @@ const SlopeChart = ({ data, year }) => {
         type: 'line'
       },
       stroke: {
-        width: [4, 4, 4],
+        width: [4, 4],
         curve: 'smooth'
       },
       xaxis: {
@@ -39,11 +32,11 @@ const SlopeChart = ({ data, year }) => {
       },
       yaxis: {
         title: {
-          text: 'Cantidad'
+          text: 'Valor'
         }
       },
       markers: {
-        size: [6, 6, 6]
+        size: [6, 6]
       },
       tooltip: {
         shared: true,
@@ -56,7 +49,7 @@ const SlopeChart = ({ data, year }) => {
     });
 
     setChartSeries(series);
-  }, [data, year]);
+  }, [data]);
 
   return (
     <Chart

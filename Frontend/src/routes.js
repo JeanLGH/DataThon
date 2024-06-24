@@ -12,19 +12,20 @@ const routes = [
     category: true,
     items: [
       {
-        name: "Salud",
+        name: "Clima",
         layout: "/admin",
-        path: "/health",
+        path: "/clima",
         icon: MdHealthAndSafety,
         component: Health,
       },
       {
-        name: "Seguridad",
+        name: "Dengue",
         layout: "/admin",
-        path: "/security",
+        path: "/dengue",
         icon: MdSecurity,
         component: Security,
       },
+      /** 
       {
         name: "Violencia",
         layout: "/admin",
@@ -32,6 +33,7 @@ const routes = [
         icon: MdWarning,
         component: Violence,
       },
+      */
     ],
   },
 ];
