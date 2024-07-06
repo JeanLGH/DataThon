@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   SimpleGrid,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import TotalNacimientos from "../../admin/health/components/TotalNacimientos";
 import HeatmapChart from "../../admin/health/components/HeatmapChart"; // Ruta al archivo HeatmapChart.js
@@ -14,15 +13,11 @@ import ClimaHistogramaBonito from "../../admin/health/components/TotalDisability
 export default function HealthReports() {
   // Estado para los datos de clima
   const [climaData, setClimaData] = useState([]);
-
-  // Constants
-  const brandColor = useColorModeValue("brand.500", "white");
-
   // Fetch data de clima
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseClima = await fetch('http://localhost:3001/clima');
+        const responseClima = await fetch('https://datathonbackend-latest.onrender.com/clima');
         if (!responseClima.ok) {
           throw new Error("Error al obtener los datos de clima del servidor");
         }
@@ -39,12 +34,10 @@ export default function HealthReports() {
   const [datosClima, setDatosClima] = useState([]);
 
   useEffect(() => {
-    // ... otros fetch ...
-
     // Fetch data clima
     const fetchDataClima = async () => {
       try {
-        const response = await fetch("http://localhost:3001/clima");
+        const response = await fetch("https://datathonbackend-latest.onrender.com/clima");
         if (!response.ok) {
           throw new Error("Error al obtener los datos climáticos del servidor");
         }
