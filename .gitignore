@@ -1,3 +1,6 @@
 Backend/service/db.js
 node_modules
 Backend/service/db.js
+
+Frontend/node_modules
+Frontend/src/api.js
