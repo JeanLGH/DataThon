@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
-import AdminLayout from './layouts/admin';
-import Health from './layouts/admin';
-import Security from  './layouts/admin';
-import Demography from  './layouts/admin';
+import AdminLayout from './layouts/datathon';
+import Health from './layouts/datathon';
+import Security from  './layouts/datathon';
+import Demography from  './layouts/datathon';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./styles/flexboxgrid.min.css";
@@ -14,14 +14,12 @@ import './styles/index.css';
 import theme from './theme/theme';
 import { ThemeEditorProvider } from '@hypertheme-editor/chakra-ui';
 
-
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css';
-
 
 const router = createBrowserRouter([
   {
@@ -37,16 +35,13 @@ const router = createBrowserRouter([
     element: <Security />,
   },
   {
-    path: "/admin/*",
+    path: "/datathon/*",
     element: <AdminLayout />,
-   
   },
   {
     path: "/clima",
     element: <Health />,
-   
   },
-  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -58,7 +53,7 @@ root.render(
           <App />
         </RouterProvider>
       </ThemeEditorProvider>
-    </React.StrictMode>,
-  </ChakraProvider>,
+    </React.StrictMode>
+  </ChakraProvider>
 );
 reportWebVitals();

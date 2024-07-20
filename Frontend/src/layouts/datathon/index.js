@@ -7,10 +7,10 @@ import { SidebarContext } from '../../contexts/SidebarContext.js';
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import routes from '../../routes.js';
-
-import Health from '../../pages/admin/health/index.jsx';
-import Security from '../../pages/admin/security/index.jsx';
-import Violence from '../../pages/admin/violence/index.jsx';
+// Pages
+import Health from '../../pages/datathon/health/index.jsx';
+import Security from '../../pages/datathon/security/index.jsx';
+import Violence from '../../pages/datathon/violence/index.jsx';
 
 // Custom Chakra theme
 export default function Dashboard(props) {
@@ -20,7 +20,7 @@ export default function Dashboard(props) {
 	const [toggleSidebar, setToggleSidebar] = useState(false);
 	// functions for changing the states from components
 	const getRoute = () => {
-		return window.location.pathname !== '/admin/full-screen-maps';
+		return window.location.pathname !== '/datathon/full-screen-maps';
 	};
 	const getActiveRoute = (routes) => {
 		let activeRoute = 'Default Brand Text';
@@ -87,7 +87,7 @@ export default function Dashboard(props) {
 	};
 	const getRoutes = (routes) => {
 		return routes.map((prop, key) => {
-			if (prop.layout === '/admin') {
+			if (prop.layout === '/datathon') {
 				if (prop.component) {
 					return (
 						<Route
@@ -114,8 +114,6 @@ export default function Dashboard(props) {
 	const { onOpen } = useDisclosure();
 	document.documentElement.dir = 'ltr';
 	return (
-
-
 		<Box>
 			<Box>
 				<SidebarContext.Provider
@@ -162,7 +160,7 @@ export default function Dashboard(props) {
 							</Box>
 						) : null}
 					</Box>
-				</SidebarContext.Provider>
+					</SidebarContext.Provider>
 			</Box>
 		</Box>
 	);

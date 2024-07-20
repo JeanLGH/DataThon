@@ -1,26 +1,38 @@
-import { MdSecurity, MdHealthAndSafety, MdWarning } from "react-icons/md";
+import { MdSecurity, MdHealthAndSafety, MdWarning, MdHome } from "react-icons/md";
 
-import Health from "./pages/admin/health";
-import Security from "./pages/admin/security";
-import Violence from "./pages/admin/violence";
-
+import Health from "./pages/datathon/health";
+import Security from "./pages/datathon/security";
+import Violence from "./pages/datathon/violence";
+import Principal from "./pages/datathon/principal"; // Asegúrate de crear este componente
 
 const routes = [
-
+  {
+    name: "Principal",
+    category: true,
+    items: [
+      {
+        name: "Página Principal",
+        layout: "/datathon",
+        path: "/principal",
+        icon: MdHome,
+        component: Principal,
+      },
+    ],
+  },
   {
     name: "Indicadores",
     category: true,
     items: [
       {
         name: "Clima",
-        layout: "/admin",
+        layout: "/datathon",
         path: "/clima",
         icon: MdHealthAndSafety,
         component: Health,
       },
       {
         name: "Dengue",
-        layout: "/admin",
+        layout: "/datathon",
         path: "/dengue",
         icon: MdSecurity,
         component: Security,
@@ -28,7 +40,7 @@ const routes = [
       /** 
       {
         name: "Violencia",
-        layout: "/admin",
+        layout: "/datathon",
         path: "/violence",
         icon: MdWarning,
         component: Violence,
