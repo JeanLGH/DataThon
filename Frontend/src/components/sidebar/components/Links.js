@@ -1,3 +1,5 @@
+//links
+
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Box, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
@@ -5,7 +7,6 @@ import { Box, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
 export function SidebarLinks(props) {
   const location = useLocation();
   const activeColor = useColorModeValue("gray.700", "white");
-  //const inactiveColor = useColorModeValue("secondaryGray.600", "white");
   const activeIcon = useColorModeValue("brand.500", "white");
   const textColor = useColorModeValue("secondaryGray.500", "white");
   const brandColor = useColorModeValue("brand.500", "brand.400");
@@ -38,26 +39,64 @@ export function SidebarLinks(props) {
             {createLinks(route.items)}
           </React.Fragment>
         );
+      } else if (route.external) {
+        // Enlace externo
+        return (
+          <Box
+            key={index}
+            onClick={() => window.open(route.external, '_blank')}
+            _hover={{ cursor: 'pointer' }}
+          >
+            <HStack
+              spacing={activeRoute(route.path ? route.path.toLowerCase() : '') ? "22px" : "26px"}
+              py='5px'
+              ps='10px'
+            >
+              <Flex w='100%' alignItems='center' justifyContent='center'>
+                <Box
+                  color={activeRoute(route.path ? route.path.toLowerCase() : '') ? activeIcon : textColor}
+                  me='18px'
+                >
+                  {route.icon && <route.icon />}
+                </Box>
+                <Text
+                  me='auto'
+                  color={activeRoute(route.path ? route.path.toLowerCase() : '') ? activeColor : textColor}
+                  fontWeight={activeRoute(route.path ? route.path.toLowerCase() : '') ? "bold" : "normal"}
+                >
+                  {route.name}
+                </Text>
+              </Flex>
+              <Box
+                h='36px'
+                w='4px'
+                bg={activeRoute(route.path ? route.path.toLowerCase() : '') ? brandColor : "transparent"}
+                borderRadius='5px'
+              />
+            </HStack>
+          </Box>
+        );
       } else if (route.layout === "/datathon" || route.layout === "/auth") {
+        // Enlace interno
         return (
           <NavLink key={index} to={route.layout + route.path}>
             <Box>
               <HStack
-                spacing={activeRoute(route.path.toLowerCase()) ? "22px" : "26px"}
+                spacing={activeRoute(route.path ? route.path.toLowerCase() : '') ? "22px" : "26px"}
                 py='5px'
                 ps='10px'
               >
                 <Flex w='100%' alignItems='center' justifyContent='center'>
                   <Box
-                    color={activeRoute(route.path.toLowerCase()) ? activeIcon : textColor}
+                    color={activeRoute(route.path ? route.path.toLowerCase() : '') ? activeIcon : textColor}
                     me='18px'
                   >
                     {route.icon && <route.icon />}
                   </Box>
                   <Text
                     me='auto'
-                    color={activeRoute(route.path.toLowerCase()) ? activeColor : textColor}
-                    fontWeight={activeRoute(route.path.toLowerCase()) ? "bold" : "normal"}
+                    color={activeRoute(route.path ? route.path.toLowerCase() : '') ? activeColor : textColor}
+                    fontWeight={activeRoute(route.path ? route.path.toLowerCase() : '') ? "bold" : "normal"}
                   >
                     {route.name}
                   </Text>
@@ -65,7 +104,7 @@ export function SidebarLinks(props) {
                 <Box
                   h='36px'
                   w='4px'
-                  bg={activeRoute(route.path.toLowerCase()) ? brandColor : "transparent"}
+                  bg={activeRoute(route.path ? route.path.toLowerCase() : '') ? brandColor : "transparent"}
                   borderRadius='5px'
                 />
               </HStack>

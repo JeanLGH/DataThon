@@ -1,3 +1,4 @@
+//rutas
 import { MdHome } from "react-icons/md";
 import { WiDayCloudy } from 'react-icons/wi';
 import { GiAmberMosquito } from 'react-icons/gi';
@@ -41,10 +42,8 @@ const routes = [
       },
       {
         name: "Modelo Predictivo",
-        layout: "/datathon",
-        path: "/modelo",
-        icon: FaChartLine,
-        component: Modelo,
+        icon: FaChartLine, // reemplaza con el icono que quieras
+        external: "https://jedsdenguereport.netlify.app/",
       },
     ],
   },

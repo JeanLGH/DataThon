@@ -1,20 +1,34 @@
+//INDEX MODELO
+// pages/datathon/modelo/index.jsx
+
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 
 const Modelo = () => {
   return (
-    <Box display="flex" alignItems="center" justifyContent="center" h="100vh" overflow="hidden" m={0} p={0}>
-      <iframe
-        src="https://jedsdenguereport.netlify.app/"
-        style={{
-          width: '100%',
-          height: '100%',
-          border: 'none'
-        }}
-        title="Modelo Predictivo"
-      />
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      h="100vh"
+      w="100vw"
+      overflow="hidden"
+      m={0}
+      p={0}
+    >
+      <Button
+        as="a"
+        href="https://jedsdenguereport.netlify.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        colorScheme="blue"
+      >
+        Abrir Modelo Predictivo
+      </Button>
     </Box>
   );
 };
 
 export default Modelo;
+
+
