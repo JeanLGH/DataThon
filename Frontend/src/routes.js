@@ -1,9 +1,9 @@
-import { MdSecurity, MdHealthAndSafety, MdWarning, MdHome } from "react-icons/md";
+import { MdSecurity, MdHealthAndSafety, MdHome } from "react-icons/md";
 
 import Health from "./pages/datathon/health";
 import Security from "./pages/datathon/security";
 import Violence from "./pages/datathon/violence";
-import Principal from "./pages/datathon/principal"; // Asegúrate de crear este componente
+import Principal from "./pages/datathon/principal";
 
 const routes = [
   {
