@@ -13,7 +13,7 @@ const routes = [
       {
         name: "Página Principal",
         layout: "/datathon",
-        path: "/principal",
+        path: "/",
         icon: MdHome,
         component: Principal,
       },

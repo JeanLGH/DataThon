@@ -1,4 +1,3 @@
-// HeatmapChart.js
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import Card from "../../../../components/card/Card.js";
@@ -6,15 +5,32 @@ import Card from "../../../../components/card/Card.js";
 const HeatmapChart = ({ data }) => {
   const [chartOptions, setChartOptions] = useState({
     chart: {
+      height: 350,
       type: 'heatmap',
     },
+    stroke: {
+      width: 0
+    },
+    plotOptions: {
+      heatmap: {
+        radius: 30,
+        enableShades: false,
+        colorScale: {
+          ranges: []
+        },
+      }
+    },
     dataLabels: {
-      enabled: false
+      enabled: true,
+      style: {
+        colors: ['#fff']
+      }
     },
     xaxis: {
       title: {
-        text: 'Días'
+        text: 'DÃ­as'
       },
+      type: 'category',
       categories: Array.from({ length: 31 }, (_, i) => i + 1)
     },
     yaxis: {
@@ -48,12 +64,31 @@ const HeatmapChart = ({ data }) => {
 
   useEffect(() => {
     if (data && data.length > 0) {
-      const min = Math.min(...data.map(item => item.tavg));
-      const max = Math.max(...data.map(item => item.tavg));
-      const avg = data.reduce((acc, item) => acc + item.tavg, 0) / data.length;
+      const tavgValues = data.map(item => item.tavg);
+      const min = Math.min(...tavgValues);
+      const max = Math.max(...tavgValues);
+      const avg = tavgValues.reduce((acc, val) => acc + val, 0) / tavgValues.length;
 
-      const series = generateSeries(data, min, max, avg); // Generar series a partir de los datos reales
+      const series = generateSeries(data, min, max, avg);
       setChartSeries(series);
+
+      const ranges = [
+        { from: 0, to: 0, color: '#CCCCCC' }, // Gris para valores 0
+        { from: min, to: 22.98, color: '#00E396' }, // Verde
+        { from: 22.99, to: 24.999, color: '#FEB019' }, // Amarillo
+        { from: 25.0, to: max, color: '#FF4560' } // Rojo
+      ];
+
+      setChartOptions(prevOptions => ({
+        ...prevOptions,
+        plotOptions: {
+          ...prevOptions.plotOptions,
+          heatmap: {
+            ...prevOptions.plotOptions.heatmap,
+            colorScale: { ranges }
+          }
+        }
+      }));
     }
   }, [data]);
 
@@ -62,35 +97,24 @@ const HeatmapChart = ({ data }) => {
       name: chartOptions.yaxis.categories[i],
       data: Array.from({ length: 31 }, (_, j) => ({
         x: j + 1,
-        y: 0, // Inicializar con 0
-        fillColor: '#00E396' // Color inicial
+        y: 0
       }))
     }));
 
-    // Recorrer los datos y asignar los valores correspondientes
     data.forEach(item => {
       const fecha = new Date(item.date);
-      const mes = fecha.getMonth(); // 0-11
-      const dia = fecha.getDate(); // 1-31
-      const valor = item.tavg; // Temperatura promedio
+      const mes = fecha.getMonth();
+      const dia = fecha.getDate();
+      const valor = item.tavg;
 
-      // Asignar el valor y el color según la temperatura de ese día
       series[mes].data[dia - 1].y = valor;
-      series[mes].data[dia - 1].fillColor = getColor(valor, min, max, avg);
     });
 
     return series;
   };
 
-  const getColor = (value, min, max, avg) => {
-    // Asignar colores según el valor comparado con min, max y avg
-    if (value <= avg) return '#00E396';    // Verde
-    if (value > avg && value < max) return '#FEB019';    // Amarillo
-    return '#FF4560';                    // Rojo
-  };
-  
   return (
-    <Card align="center" direction="column" w="100%" >
+    <Card align="center" direction="column" w="100%">
       <Chart
         options={chartOptions}
         series={chartSeries}

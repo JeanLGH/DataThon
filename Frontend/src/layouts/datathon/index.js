@@ -11,6 +11,7 @@ import routes from '../../routes.js';
 import Health from '../../pages/datathon/health/index.jsx';
 import Security from '../../pages/datathon/security/index.jsx';
 import Violence from '../../pages/datathon/violence/index.jsx';
+import Principal from '../../pages/datathon/principal/index.jsx';
 
 // Custom Chakra theme
 export default function Dashboard(props) {
@@ -152,6 +153,7 @@ export default function Dashboard(props) {
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Routes>
 									{getRoutes(routes)}
+									<Route path="/" element={<Principal />} />
 									<Route path="/clima" element={<Health />} />
 									<Route path="/dengue" element={<Security />} />
 									<Route path="/violence" element={<Violence />} />
