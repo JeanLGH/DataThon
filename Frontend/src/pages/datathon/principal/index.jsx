@@ -84,7 +84,7 @@ const PrincipalDashboard = () => {
                     title="Modelo Predictivo"
                     icon={FaChartLine}
                     description="Predice la probabilidad de casos de dengue basado en factores climáticos."
-                    linkTo="/datathon/modelo"
+                    linkTo="https://jedsdenguereport.netlify.app"
                 />
             </SimpleGrid>
 
