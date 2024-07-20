@@ -1,10 +1,10 @@
 import { MdHome } from "react-icons/md";
 import { WiDayCloudy } from 'react-icons/wi';
 import { GiAmberMosquito } from 'react-icons/gi';
-
-import Health from "./pages/datathon/clima";
-import Security from "./pages/datathon/dengue";
-import Violence from "./pages/datathon/violence";
+import { FaChartLine} from 'react-icons/fa';
+import Clima from "./pages/datathon/clima";
+import Dengue from "./pages/datathon/dengue";
+import Modelo from "./pages/datathon/modelo";
 import Principal from "./pages/datathon/principal";
 
 const routes = [
@@ -30,24 +30,22 @@ const routes = [
         layout: "/datathon",
         path: "/clima",
         icon: WiDayCloudy,
-        component: Health,
+        component: Clima,
       },
       {
         name: "Dengue",
         layout: "/datathon",
         path: "/dengue",
         icon: GiAmberMosquito,
-        component: Security,
+        component: Dengue,
       },
-      /** 
       {
-        name: "Violencia",
+        name: "Modelo Predictivo",
         layout: "/datathon",
-        path: "/violence",
-        icon: MdWarning,
-        component: Violence,
+        path: "/modelo",
+        icon: FaChartLine,
+        component: Modelo,
       },
-      */
     ],
   },
 ];
