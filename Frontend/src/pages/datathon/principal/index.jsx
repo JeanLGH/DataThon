@@ -11,7 +11,7 @@ import {
     HStack,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { FaChartLine, FaThermometerHalf, FaTint, FaHospital, FaVenusMars } from 'react-icons/fa';
+import { FaChartLine, FaThermometerHalf, FaHospital, FaVenusMars } from 'react-icons/fa';
 import { WiDayCloudy, WiRaindrops } from 'react-icons/wi';
 import { GiAmberMosquito } from 'react-icons/gi';
 import { motion } from 'framer-motion';

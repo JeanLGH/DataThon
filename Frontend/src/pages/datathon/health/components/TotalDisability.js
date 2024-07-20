@@ -1,6 +1,6 @@
 // ClimaHistograma.js
 import React, { useState } from "react";
-import { Box, Flex, Select, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "../../../../components/card/Card.js";
 import ClimaChart from "../../../../components/charts/security/AreaChartAcc.js";
 
