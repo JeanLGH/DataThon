@@ -1,7 +1,9 @@
-import { MdSecurity, MdHealthAndSafety, MdHome } from "react-icons/md";
+import { MdHome } from "react-icons/md";
+import { WiDayCloudy } from 'react-icons/wi';
+import { GiAmberMosquito } from 'react-icons/gi';
 
-import Health from "./pages/datathon/health";
-import Security from "./pages/datathon/security";
+import Health from "./pages/datathon/clima";
+import Security from "./pages/datathon/dengue";
 import Violence from "./pages/datathon/violence";
 import Principal from "./pages/datathon/principal";
 
@@ -27,14 +29,14 @@ const routes = [
         name: "Clima",
         layout: "/datathon",
         path: "/clima",
-        icon: MdHealthAndSafety,
+        icon: WiDayCloudy,
         component: Health,
       },
       {
         name: "Dengue",
         layout: "/datathon",
         path: "/dengue",
-        icon: MdSecurity,
+        icon: GiAmberMosquito,
         component: Security,
       },
       /** 

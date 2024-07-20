@@ -3,12 +3,12 @@ import {
   Box,
   SimpleGrid,
 } from "@chakra-ui/react";
-import TotalNacimientos from "../../datathon/health/components/TotalNacimientos";
-import HeatmapChart from "../../datathon/health/components/HeatmapChart";
+import TotalNacimientos from "../../datathon/clima/components/TotalNacimientos";
+import HeatmapChart from "../../datathon/clima/components/HeatmapChart";
 
-import ClimaHistograma from "../../datathon/health/components/TotalAfiliaciones";
+import ClimaHistograma from "../../datathon/clima/components/TotalAfiliaciones";
 
-import ClimaHistogramaBonito from "../../datathon/health/components/TotalDisability";
+import ClimaHistogramaBonito from "../../datathon/clima/components/TotalDisability";
 
 export default function HealthReports() {
   // Estado para los datos de clima

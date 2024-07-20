@@ -8,8 +8,8 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import routes from '../../routes.js';
 // Pages
-import Health from '../../pages/datathon/health/index.jsx';
-import Security from '../../pages/datathon/security/index.jsx';
+import Clima from '../../pages/datathon/clima/index.jsx';
+import Dengue from '../../pages/datathon/dengue/index.jsx';
 import Violence from '../../pages/datathon/violence/index.jsx';
 import Principal from '../../pages/datathon/principal/index.jsx';
 
@@ -154,8 +154,8 @@ export default function Dashboard(props) {
 								<Routes>
 									{getRoutes(routes)}
 									<Route path="/" element={<Principal />} />
-									<Route path="/clima" element={<Health />} />
-									<Route path="/dengue" element={<Security />} />
+									<Route path="/clima" element={<Clima />} />
+									<Route path="/dengue" element={<Dengue />} />
 									<Route path="/violence" element={<Violence />} />
 									
 								</Routes>

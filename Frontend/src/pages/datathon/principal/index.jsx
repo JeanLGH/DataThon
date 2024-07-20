@@ -11,14 +11,25 @@ import {
     HStack,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { FaChartLine, FaThermometerHalf, FaHospital, FaVenusMars } from 'react-icons/fa';
+import { FaChartLine, FaThermometerHalf, FaTint, FaHospital, FaVenusMars } from 'react-icons/fa';
 import { WiDayCloudy, WiRaindrops } from 'react-icons/wi';
 import { GiAmberMosquito } from 'react-icons/gi';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const MotionBox = motion(Box);
 
-const FeatureBox = ({ title, icon, description }) => {
+const FeatureBox = ({ title, icon, description, linkTo }) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        if (linkTo.startsWith('http')) {
+            window.open(linkTo, '_blank');
+        } else {
+            navigate(linkTo);
+        }
+    };
+
     return (
         <MotionBox
             p={5}
@@ -29,6 +40,8 @@ const FeatureBox = ({ title, icon, description }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3 }}
+            onClick={handleClick}
+            cursor="pointer"
         >
             <VStack spacing={3} align="center">
                 <Icon as={icon} w={10} h={10} color="blue.500" />
@@ -49,9 +62,9 @@ const SectionItem = ({ icon, text }) => (
 const PrincipalDashboard = () => {
     return (
         <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-            <Heading mb={6} textAlign="center">¡Conoce del Clima y del Dengue!</Heading>
+            <Heading mb={6} textAlign="center">Bienvenido al Dashboard de Clima y Dengue</Heading>
             <Text fontSize="xl" textAlign="center" mb={10}>
-                Explora datos climáticos y casos de dengue con nuestro innovador modelo predictivo desarrollado por JEDS Team.
+                Explora datos climáticos y casos de dengue con nuestro innovador modelo predictivo.
             </Text>
 
             <SimpleGrid columns={{ base: 1, md: 3, xl: 3 }} gap="20px" mb="20px">
@@ -59,16 +72,19 @@ const PrincipalDashboard = () => {
                     title="Clima"
                     icon={WiDayCloudy}
                     description="Visualiza datos climáticos promedio, temperaturas y precipitaciones."
+                    linkTo="/datathon/clima"
                 />
                 <FeatureBox
                     title="Dengue"
                     icon={GiAmberMosquito}
                     description="Analiza casos de dengue, hospitalizaciones y síntomas a lo largo del tiempo."
+                    linkTo="/datathon/dengue"
                 />
                 <FeatureBox
                     title="Modelo Predictivo"
                     icon={FaChartLine}
                     description="Predice la probabilidad de casos de dengue basado en factores climáticos."
+                    linkTo="https://jedsdenguereport.netlify.app/"
                 />
             </SimpleGrid>
 
