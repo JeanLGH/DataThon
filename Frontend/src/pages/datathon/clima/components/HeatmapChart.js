@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import Card from "../../../../components/card/Card.js";
+import { Flex, Text } from "@chakra-ui/react";
 
 const HeatmapChart = ({ data }) => {
   const [chartOptions, setChartOptions] = useState({
@@ -28,7 +29,7 @@ const HeatmapChart = ({ data }) => {
     },
     xaxis: {
       title: {
-        text: 'DÃ­as'
+        text: 'Días'
       },
       type: 'category',
       categories: Array.from({ length: 31 }, (_, i) => i + 1)
@@ -50,14 +51,7 @@ const HeatmapChart = ({ data }) => {
         }
       }
     },
-    title: {
-      text: 'Mapa de Calor',
-      align: 'center',
-      style: {
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }
-    }
+   
   });
 
   const [chartSeries, setChartSeries] = useState([]);
@@ -115,6 +109,11 @@ const HeatmapChart = ({ data }) => {
 
   return (
     <Card align="center" direction="column" w="100%">
+       <Flex align="center" w="100%" px="15px" py="10px">
+        <Text me="auto" fontSize="xl" fontWeight="700" lineHeight="100%">
+          Mapa de Calor de la Temperatura Promedio
+        </Text>
+      </Flex>
       <Chart
         options={chartOptions}
         series={chartSeries}

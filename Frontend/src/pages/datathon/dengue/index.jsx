@@ -1,4 +1,3 @@
-// index.jsx
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -8,36 +7,32 @@ import DengueChart from "./components/DengueChart.jsx";
 import DengueBarChart from "./components/TotalAccesosCarnales.js";
 import DengueSi from "./components/TotalHurtos.js";
 import DengueClimatico from "./components/TotalLesiones.js";
-
+import { fetchDengueData, fetchClimaData } from '../../../api';
 
 export default function SecurityReports() {
-
   const [dengueData, setDengueData] = useState([]);
   const [climaData, setClimaData] = useState([]);
 
   useEffect(() => {
-    fetch("https://datathonbackend-latest.onrender.com/dengue")
-      .then((response) => response.json())
-      .then((data) => {
-        setDengueData(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+    const fetchData = async () => {
+      const dengue = await fetchDengueData();
+      setDengueData(dengue);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
-    fetch("https://datathonbackend-latest.onrender.com/clima")
-      .then((response) => response.json())
-      .then((data) => {
-        setClimaData(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+    const fetchData = async () => {
+      const clima = await fetchClimaData();
+      setClimaData(clima);
+    };
+    fetchData();
   }, []);
-
 
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap="20px" mb="20px">
-      <DengueChart dengueData={dengueData} />
+        <DengueChart dengueData={dengueData} />
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap="20px" mb="20px">
         {dengueData.length > 0 ? (
@@ -48,13 +43,8 @@ export default function SecurityReports() {
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
         <DengueBarChart data={dengueData} />
-      
-      
         <DengueClimatico data={climaData} />
       </SimpleGrid>
-  
-
-      
     </Box>
   );
 }

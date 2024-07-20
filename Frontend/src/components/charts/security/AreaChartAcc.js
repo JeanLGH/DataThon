@@ -11,18 +11,18 @@ const ClimaChart = ({ data }) => {
       if (!porMes[mesAnio]) {
         porMes[mesAnio] = { tmax: [], tmin: [], tavg: [], prcp: [] };
       }
-      porMes[mesAnio].tmax.push(item.tmax);
-      porMes[mesAnio].tmin.push(item.tmin);
-      porMes[mesAnio].tavg.push(item.tavg);
-      porMes[mesAnio].prcp.push(item.prcp);
+      if (item.tmax !== undefined) porMes[mesAnio].tmax.push(item.tmax);
+      if (item.tmin !== undefined) porMes[mesAnio].tmin.push(item.tmin);
+      if (item.tavg !== undefined) porMes[mesAnio].tavg.push(item.tavg);
+      if (item.prcp !== undefined) porMes[mesAnio].prcp.push(item.prcp);
     });
 
     return Object.entries(porMes).map(([mesAnio, valores]) => ({
       fecha: mesAnio,
-      tmax: valores.tmax.reduce((a, b) => a + b, 0) / valores.tmax.length,
-      tmin: valores.tmin.reduce((a, b) => a + b, 0) / valores.tmin.length,
-      tavg: valores.tavg.reduce((a, b) => a + b, 0) / valores.tavg.length,
-      prcp: valores.prcp.reduce((a, b) => a + b, 0), // Suma total de precipitación
+      tmax: valores.tmax.length ? valores.tmax.reduce((a, b) => a + b, 0) / valores.tmax.length : 0,
+      tmin: valores.tmin.length ? valores.tmin.reduce((a, b) => a + b, 0) / valores.tmin.length : 0,
+      tavg: valores.tavg.length ? valores.tavg.reduce((a, b) => a + b, 0) / valores.tavg.length : 0,
+      prcp: valores.prcp.length ? valores.prcp.reduce((a, b) => a + b, 0) : 0, // Suma total de precipitación
     }));
   };
 
@@ -84,7 +84,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value.toFixed(1); // Ajustar a un decimal
+            return value !== undefined ? value.toFixed(1) : '0'; // Ajustar a un decimal
           }
         }
       },
@@ -95,7 +95,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value.toFixed(1); // Ajustar a un decimal
+            return value !== undefined ? value.toFixed(1) : '0'; // Ajustar a un decimal
           }
         }
       }
@@ -105,10 +105,8 @@ const ClimaChart = ({ data }) => {
       intersect: false,
       y: {
         formatter: function (val, { seriesIndex }) {
-          if (seriesIndex === 3) {
-            return val.toFixed(1) + " mm";
-          }
-          return val.toFixed(1) + " °C";
+          if (val === undefined) return '0';
+          return seriesIndex === 3 ? val.toFixed(1) + " mm" : val.toFixed(1) + " °C";
         }
       }
     },

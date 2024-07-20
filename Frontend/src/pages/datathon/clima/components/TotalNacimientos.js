@@ -11,7 +11,7 @@ export default function TotalNacimientos({
 }) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
 
-  // Función para agrupar los datos por meses
+  // Función para agrupar los datos por meses y ordenarlos
   const groupDataByMonth = (data) => {
     const groupedData = {};
     data.forEach(item => {
@@ -25,15 +25,22 @@ export default function TotalNacimientos({
       groupedData[month].prcp.push(item.prcp);
       groupedData[month].tavg.push(item.tavg);
     });
-    return groupedData;
+
+    // Lista de meses en el orden correcto
+    const monthOrder = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+    // Ordenar los datos agrupados por el orden de los meses
+    const sortedData = monthOrder.map(month => ({
+      month,
+      prcp: groupedData[month] ? groupedData[month].prcp.reduce((acc, curr) => acc + curr, 0) / groupedData[month].prcp.length : 0,
+      tavg: groupedData[month] ? groupedData[month].tavg.reduce((acc, curr) => acc + curr, 0) / groupedData[month].tavg.length : 0
+    }));
+
+    return sortedData;
   };
 
   // Filtrar y preparar datos agrupados para el gráfico
-  const chartData = Object.entries(groupDataByMonth(nacimientosData)).map(([month, values]) => ({
-    month,
-    prcp: values.prcp.reduce((acc, curr) => acc + curr, 0) / values.prcp.length, 
-    tavg: values.tavg.reduce((acc, curr) => acc + curr, 0) / values.tavg.length 
-  }));
+  const chartData = groupDataByMonth(nacimientosData);
 
   return (
     <Card align="center" direction="column" w="100%" {...rest}>

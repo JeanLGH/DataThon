@@ -1,109 +1,129 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import Card from "../../../../components/card/Card.js";
+import { Flex, Text } from "@chakra-ui/react";
 
 const DengueChart = ({ dengueData }) => {
   const [chartOptions, setChartOptions] = useState({
     chart: {
-      type: 'area',
-      height: 350,
-      zoom: {
-        enabled: true
+      id: 'chart2',
+      type: 'line',
+      height: 230,
+      toolbar: {
+        autoSelected: 'pan',
+        show: true
       }
+    },
+    colors: ['#7457D8'],
+    stroke: {
+      width: 3
     },
     dataLabels: {
       enabled: false
     },
+    fill: {
+      opacity: 1,
+    },
+    markers: {
+      size: 0
+    },
+    xaxis: {
+      type: 'datetime'
+    }
+  });
+
+  const [brushChartOptions, setBrushChartOptions] = useState({
+    chart: {
+      id: 'chart1',
+      height: 130,
+      type: 'area',
+      brush: {
+        target: 'chart2',
+        enabled: true
+      },
+      selection: {
+        enabled: true,
+      },
+    },
+    colors: ['#7457D8'],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        opacityFrom: 0.91,
+        opacityTo: 0.1,
+      }
+    },
     xaxis: {
       type: 'datetime',
-      title: {
-        text: 'Fecha'
-      },
-      labels: {
-        formatter: function (val) {
-          const date = new Date(val);
-          const monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-          return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-        }
+      tooltip: {
+        enabled: false
       }
     },
     yaxis: {
-      title: {
-        text: 'Número de hospitalizados '
-      }
-    },
-    tooltip: {
-      enabled: true,
-      x: {
-        format: 'dd/MM/yyyy'
-      }
-    },
-    title: {
-      text: 'Hospitalizados por dengue',
-      align: 'center',
-      style: {
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }
+      tickAmount: 2
     }
   });
 
   const [chartSeries, setChartSeries] = useState([]);
+  const [brushChartSeries, setBrushChartSeries] = useState([]);
 
   useEffect(() => {
     if (dengueData.length > 0) {
-      const dates = []; // Array para almacenar las fechas únicas
-      const symptomCounts = []; // Array para contar los síntomas "Si" por cada fecha
+      const dates = [];
+      const symptomCounts = [];
 
-      // Recorremos los datos de dengueData para calcular conteos de síntomas "Si"
       dengueData.forEach(caso => {
-        const fechaInicio = new Date(caso.fecha_inicio_sintomas).toISOString().split('T')[0]; // Obtener la fecha de inicio de síntomas (solo fecha, sin hora)
-        const index = dates.findIndex(item => item === fechaInicio); // Buscar si la fecha ya está en dates
+        const fechaInicio = new Date(caso.fecha_inicio_sintomas).toISOString().split('T')[0];
+        const index = dates.findIndex(item => item === fechaInicio);
 
         if (index === -1) {
-          // Si la fecha no está en dates, la agregamos y creamos un conteo inicial
           dates.push(fechaInicio);
           symptomCounts.push({
             fecha: fechaInicio,
             count: countSymptoms(caso)
           });
         } else {
-          // Si la fecha ya está en dates, incrementamos el conteo de síntomas "Si"
           symptomCounts[index].count += countSymptoms(caso);
         }
       });
 
-      // Ordenar las fechas de manera ascendente
       dates.sort();
 
-      // Construir la serie de datos para ApexCharts
       const seriesData = dates.map(date => {
         const index = symptomCounts.findIndex(item => item.fecha === date);
         return {
-          x: new Date(date).getTime(), // Convertir la fecha a timestamp
+          x: new Date(date).getTime(),
           y: symptomCounts[index].count
         };
       });
 
       setChartSeries([{ name: 'Casos de hospitalizados', data: seriesData }]);
+      setBrushChartSeries([{ name: 'Casos de hospitalizados', data: seriesData }]);
     }
   }, [dengueData]);
 
-  // Función para contar los síntomas "Si" en un caso de dengue
   const countSymptoms = (caso) => {
-    let count = 0;
-    // Contar los síntomas "Si"
-    if (caso.hospitalizado === 'Si') count++;
-    return count;
+    return caso.hospitalizado === 'Si' ? 1 : 0;
   };
 
   return (
     <Card align="center" direction="column" w="100%">
+      <Flex align="center" w="100%" px="15px" py="10px">
+        <Text me="auto" fontSize="xl" fontWeight="700" lineHeight="100%">
+          Casos de hospitalizados en el año 2023
+        </Text>
+      </Flex>
       <Chart
         options={chartOptions}
         series={chartSeries}
+        type="line"
+        height={230}
+      />
+      <Chart
+        options={brushChartOptions}
+        series={brushChartSeries}
         type="area"
-        height={350}
+        height={130}
       />
     </Card>
   );

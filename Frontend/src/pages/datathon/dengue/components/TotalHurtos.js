@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import { Box } from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
+import { Flex, Text } from "@chakra-ui/react";
 import { Card } from 'antd';
 
 const DengueChart = ({ dengueData }) => {
@@ -47,7 +48,7 @@ const DengueChart = ({ dengueData }) => {
       }
     },
     title: {
-      text: 'Acumulación de síntomas de Dengue',
+      text: '',
       align: 'center',
       style: { fontSize: '16px', fontWeight: 'bold' }
     },
@@ -122,6 +123,11 @@ const DengueChart = ({ dengueData }) => {
   return (
     <Box>
       <Card align="center" direction="column" w="100%" >
+      <Flex align="center" w="100%" px="15px" py="10px">
+        <Text me="auto" fontSize="xl" fontWeight="700" lineHeight="100%">
+        Acumulación de síntomas de Dengue
+        </Text>
+      </Flex>
       <Select
         isMulti
         name="symptoms"

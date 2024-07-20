@@ -11,7 +11,7 @@ export default function ClimaHistograma({ data, ...rest }) {
     <Card align="center" direction="column" w="100%" {...rest}>
       <Flex align="center" w="100%" px="15px" py="10px">
         <Text me="auto" color={textColor} fontSize="xl" fontWeight="700" lineHeight="100%">
-          Gráfico de barras Climático
+          Temperatura y Precipitación
         </Text>
       </Flex>
       <Box h="350px" mt="auto" w="100%">
