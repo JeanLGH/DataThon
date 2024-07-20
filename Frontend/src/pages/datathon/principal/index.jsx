@@ -49,9 +49,9 @@ const SectionItem = ({ icon, text }) => (
 const PrincipalDashboard = () => {
     return (
         <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-            <Heading mb={6} textAlign="center">Bienvenido al Dashboard de Clima y Dengue</Heading>
+            <Heading mb={6} textAlign="center">¡Conoce del Clima y del Dengue!</Heading>
             <Text fontSize="xl" textAlign="center" mb={10}>
-                Explora datos climáticos y casos de dengue con nuestro innovador modelo predictivo.
+                Explora datos climáticos y casos de dengue con nuestro innovador modelo predictivo desarrollado por JEDS Team.
             </Text>
 
             <SimpleGrid columns={{ base: 1, md: 3, xl: 3 }} gap="20px" mb="20px">
