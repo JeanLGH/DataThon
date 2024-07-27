@@ -43,7 +43,7 @@ const routes = [
       {
         name: "Modelo Predictivo",
         icon: FaChartLine, // reemplaza con el icono que quieras
-        external: "https://jedsdenguereport.netlify.app/",
+        external: "http://93.127.213.95:5003",
       },
     ],
   },
