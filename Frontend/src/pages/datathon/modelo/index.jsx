@@ -1,6 +1,3 @@
-//INDEX MODELO
-// pages/datathon/modelo/index.jsx
-
 import React from 'react';
 import { Box, Button } from '@chakra-ui/react';
 
@@ -11,24 +8,18 @@ const Modelo = () => {
       alignItems="center"
       justifyContent="center"
       h="100vh"
-      w="100vw"
       overflow="hidden"
       m={0}
       p={0}
+      pt="50px"
     >
-      <Button
-        as="a"
-        href="http://93.127.213.95:5003"
-        target="_blank"
-        rel="noopener noreferrer"
-        colorScheme="blue"
-      >
-        Abrir Modelo Predictivo
-      </Button>
+      <iframe
+        src="http://93.127.213.95:5003"
+        style={{ width: '100%', height: '100%', border: 'none', margin: 0, padding: 0 }}
+        title="Modelo Predictivo"
+      />
     </Box>
   );
 };
 
 export default Modelo;
-
-
