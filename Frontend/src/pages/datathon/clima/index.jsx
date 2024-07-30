@@ -14,23 +14,52 @@ import { FaTemperatureHigh, FaCloudRain } from "react-icons/fa";
 
 export default function HealthReports() {
   const [climaData, setClimaData] = useState([]);
+  const [tempStats, setTempStats] = useState({ avg: 0, min: 0, max: 0 });
+  const [precipStats, setPrecipStats] = useState({ avg: 0, min: 0, max: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchClimaData();
       setClimaData(data);
+
+      // Calcular estadísticas de temperatura
+      const temps = data.map(item => item.tavg);
+      setTempStats({
+        avg: (temps.reduce((a, b) => a + b, 0) / temps.length).toFixed(1),
+        min: Math.min(...temps).toFixed(1),
+        max: Math.max(...temps).toFixed(1)
+      });
+
+      // Calcular estadísticas de precipitación
+      const precips = data.map(item => item.prcp);
+      setPrecipStats({
+        avg: (precips.reduce((a, b) => a + b, 0) / precips.length).toFixed(1),
+        min: Math.min(...precips).toFixed(1),
+        max: Math.max(...precips).toFixed(1)
+      });
     };
     fetchData();
   }, []);
 
-  const averageTemp = (climaData.reduce((acc, item) => acc + item.tavg, 0) / climaData.length).toFixed(1);
-  const averagePrecip = (climaData.reduce((acc, item) => acc + item.prcp, 0) / climaData.length).toFixed(1);
-
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
-        <AverageCard title="Temperatura Promedio" value={averageTemp} unit="°C" icon={FaTemperatureHigh} />
-        <AverageCard title="Precipitación Promedio" value={averagePrecip} unit="mm" icon={FaCloudRain} />
+        <AverageCard 
+          title="Temperatura Promedio" 
+          value={tempStats.avg} 
+          unit="°C" 
+          icon={FaTemperatureHigh}
+          minTemp={tempStats.min}
+          maxTemp={tempStats.max}
+        />
+        <AverageCard 
+          title="Precipitación Promedio" 
+          value={precipStats.avg} 
+          unit="mm" 
+          icon={FaCloudRain}
+          minTemp={precipStats.min}
+          maxTemp={precipStats.max}
+        />
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap="20px" mb="20px">
         <TotalNacimientos nacimientosData={climaData} selectedYear={2023} />
