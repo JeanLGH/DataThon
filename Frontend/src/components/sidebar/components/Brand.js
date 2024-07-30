@@ -1,12 +1,11 @@
 import React from "react";
 
 // Chakra imports
-import { Flex, useColorModeValue, Image} from "@chakra-ui/react";
+import { Flex, useColorModeValue} from "@chakra-ui/react";
 
 // Custom components
 import { NNCVIcon } from "../../icons/Icons";
 import { HSeparator } from "../../separator/Separator";
-import logoImage from "../../../assets/img/dashboards/Usb.png"; 
 
 export function SidebarBrand() {
   //   Chakra color mode
@@ -14,15 +13,7 @@ export function SidebarBrand() {
 
   return (
     <Flex align='center' justify='center' direction='column'>
-      <Flex align='center' justify='center' width='100%'>
-        <NNCVIcon h='26px' w='175px' color={logoColor} />
-        <Image 
-          src={logoImage} 
-          alt="Logo" 
-          maxHeight="40px"
-          maxWidth="70px"
-        />
-      </Flex>
+        <NNCVIcon h='26px' w='175px' color={logoColor} />      
       <HSeparator mt='20px' mb='20px' />
     </Flex>
   );

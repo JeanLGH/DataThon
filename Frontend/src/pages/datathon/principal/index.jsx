@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Box,
     Flex,
@@ -21,17 +21,14 @@ import {
     ModalCloseButton,
     useDisclosure,
 } from '@chakra-ui/react';
-import { FaChartLine, FaThermometerHalf, FaTint, FaHospital, FaVenusMars, FaLeaf, FaUserMd, FaShieldAlt, FaReact, FaNodeJs, FaDatabase, FaInfoCircle } from 'react-icons/fa';
+import { FaChartLine, FaThermometerHalf, FaHospital, FaVenusMars, FaLeaf, FaUserMd, FaShieldAlt, FaReact, FaNodeJs, FaDatabase, FaInfoCircle } from 'react-icons/fa';
 import { WiDayCloudy, WiRaindrops } from 'react-icons/wi';
 import { GiAmberMosquito } from 'react-icons/gi';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 
-
 const MotionBox = motion(Box);
-
-
 
 const FeatureBox = ({ title, icon, description, linkTo }) => {
     const navigate = useNavigate();
@@ -45,9 +42,6 @@ const FeatureBox = ({ title, icon, description, linkTo }) => {
             }
         }
     };
-
-
-
 
     return (
         <MotionBox
@@ -227,10 +221,15 @@ const PrincipalDashboard = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         colorScheme="blue"
-                        size="lg"
-                        px={8}
-                        py={6}
-                        fontSize="xl"
+                        size={{ base: 'md', md: 'lg' }}
+                        px={{ base: 4, md: 8 }}
+                        py={{ base: 4, md: 6 }}
+                        fontSize={{ base: 'md', md: 'xl' }}
+                        minWidth="120px"
+                        maxWidth="200px"
+                        textOverflow="ellipsis"
+                        whiteSpace="nowrap"
+                        overflow="hidden"
                     >
                         Comenzar Exploración
                     </Button>
@@ -239,10 +238,15 @@ const PrincipalDashboard = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         colorScheme="green"
-                        size="lg"
-                        px={8}
-                        py={6}
-                        fontSize="xl"
+                        size={{ base: 'md', md: 'lg' }}
+                        px={{ base: 4, md: 8 }}
+                        py={{ base: 4, md: 6 }}
+                        fontSize={{ base: 'md', md: 'xl' }}
+                        minWidth="120px"
+                        maxWidth="200px"
+                        textOverflow="ellipsis"
+                        whiteSpace="nowrap"
+                        overflow="hidden"
                         onClick={onOpen}
                     >
                         Tecnologías Utilizadas

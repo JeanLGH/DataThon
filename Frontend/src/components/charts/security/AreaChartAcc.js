@@ -2,7 +2,6 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const ClimaChart = ({ data }) => {
-  // Función para agrupar datos por mes
   const agruparPorMes = (datos) => {
     const porMes = {};
     datos.forEach(item => {
@@ -31,19 +30,19 @@ const ClimaChart = ({ data }) => {
   const series = [
     {
       name: 'Temperatura Máxima',
-      data: datosMensuales.map(item => parseFloat(item.tmax.toFixed(1)))
+      data: datosMensuales.map(item => parseFloat(item.tmax.toFixed(1)) || 0)
     },
     {
       name: 'Temperatura Mínima',
-      data: datosMensuales.map(item => parseFloat(item.tmin.toFixed(1)))
+      data: datosMensuales.map(item => parseFloat(item.tmin.toFixed(1)) || 0)
     },
     {
       name: 'Temperatura Promedio',
-      data: datosMensuales.map(item => parseFloat(item.tavg.toFixed(1)))
+      data: datosMensuales.map(item => parseFloat(item.tavg.toFixed(1)) || 0)
     },
     {
       name: 'Precipitación',
-      data: datosMensuales.map(item => parseFloat(item.prcp.toFixed(1)))
+      data: datosMensuales.map(item => parseFloat(item.prcp.toFixed(1)) || 0)
     }
   ];
 
@@ -81,7 +80,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value.toFixed(1);
+            return value !== undefined ? value.toFixed(1) : '0.0';
           }
         }
       },
@@ -92,7 +91,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value.toFixed(1);
+            return value !== undefined ? value.toFixed(1) : '0.0';
           }
         }
       }
@@ -102,7 +101,7 @@ const ClimaChart = ({ data }) => {
       intersect: false,
       y: {
         formatter: function (val, { seriesIndex }) {
-          return seriesIndex === 3 ? val.toFixed(1) + " mm" : val.toFixed(1) + " °C";
+          return seriesIndex === 3 ? (val !== undefined ? val.toFixed(1) + " mm" : '0.0 mm') : (val !== undefined ? val.toFixed(1) + " °C" : '0.0 °C');
         }
       }
     },
