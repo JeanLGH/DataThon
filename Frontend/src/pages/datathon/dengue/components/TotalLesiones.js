@@ -19,7 +19,7 @@ const DengueBarChart = ({ data }) => {
 
     // Filtrar los datos para separar días con y sin casos reportados de dengue
     const dataConDengue = filteredData.filter(item => item.dengue_reportado === 1 && item.tavg);
-    const dataSinDengue = filteredData.filter(item => item.dengue_reportado === null && item.tavg);
+    const dataSinDengue = filteredData.filter(item => item.dengue_reportado === 0 && item.tavg);
 
     // Obtener las temperaturas promedio para los días con y sin dengue
     const temperaturasConDengue = dataConDengue.map(item => item.tavg);

@@ -7,7 +7,7 @@ const ClimaChart = ({ data }) => {
     const porMes = {};
     datos.forEach(item => {
       const fecha = new Date(item.date);
-      const mesAnio = `${fecha.getFullYear()}-${fecha.getMonth() + 1}`;
+      const mesAnio = `${fecha.getFullYear()}-${(fecha.getMonth() + 1).toString().padStart(2, '0')}`;
       if (!porMes[mesAnio]) {
         porMes[mesAnio] = { tmax: [], tmin: [], tavg: [], prcp: [] };
       }
@@ -22,7 +22,7 @@ const ClimaChart = ({ data }) => {
       tmax: valores.tmax.length ? valores.tmax.reduce((a, b) => a + b, 0) / valores.tmax.length : 0,
       tmin: valores.tmin.length ? valores.tmin.reduce((a, b) => a + b, 0) / valores.tmin.length : 0,
       tavg: valores.tavg.length ? valores.tavg.reduce((a, b) => a + b, 0) / valores.tavg.length : 0,
-      prcp: valores.prcp.length ? valores.prcp.reduce((a, b) => a + b, 0) : 0, // Suma total de precipitación
+      prcp: valores.prcp.length ? valores.prcp.reduce((a, b) => a + b, 0) : 0,
     }));
   };
 
@@ -31,19 +31,19 @@ const ClimaChart = ({ data }) => {
   const series = [
     {
       name: 'Temperatura Máxima',
-      data: datosMensuales.map(item => item.tmax.toFixed(1)) // Ajustar a un decimal
+      data: datosMensuales.map(item => parseFloat(item.tmax.toFixed(1)))
     },
     {
       name: 'Temperatura Mínima',
-      data: datosMensuales.map(item => item.tmin.toFixed(1)) // Ajustar a un decimal
+      data: datosMensuales.map(item => parseFloat(item.tmin.toFixed(1)))
     },
     {
       name: 'Temperatura Promedio',
-      data: datosMensuales.map(item => item.tavg.toFixed(1)) // Ajustar a un decimal
+      data: datosMensuales.map(item => parseFloat(item.tavg.toFixed(1)))
     },
     {
       name: 'Precipitación',
-      data: datosMensuales.map(item => item.prcp.toFixed(1)) // Ajustar a un decimal
+      data: datosMensuales.map(item => parseFloat(item.prcp.toFixed(1)))
     }
   ];
 
@@ -69,10 +69,7 @@ const ClimaChart = ({ data }) => {
       colors: ['transparent']
     },
     xaxis: {
-      categories: datosMensuales.map(item => {
-        const [year, month] = item.fecha.split('-');
-        return `${year}-${month.padStart(2, '0')}`;
-      }),
+      categories: datosMensuales.map(item => item.fecha),
       title: {
         text: 'Mes'
       }
@@ -84,7 +81,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value !== undefined ? value.toFixed(1) : '0'; // Ajustar a un decimal
+            return value.toFixed(1);
           }
         }
       },
@@ -95,7 +92,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value !== undefined ? value.toFixed(1) : '0'; // Ajustar a un decimal
+            return value.toFixed(1);
           }
         }
       }
@@ -105,7 +102,6 @@ const ClimaChart = ({ data }) => {
       intersect: false,
       y: {
         formatter: function (val, { seriesIndex }) {
-          if (val === undefined) return '0';
           return seriesIndex === 3 ? val.toFixed(1) + " mm" : val.toFixed(1) + " °C";
         }
       }

@@ -11,12 +11,14 @@ const DengueBarChart = ({ data }) => {
 
     data.forEach((item) => {
       const date = new Date(item.fecha_inicio_sintomas);
-      const month = date.toLocaleString('default', { month: 'short', year: 'numeric' });
+      const month = date.getMonth();
+      const year = date.getFullYear();
+      const key = `${year}-${month.toString().padStart(2, '0')}`;
 
-      if (!groupedData[month]) {
-        groupedData[month] = { F: 0, M: 0 };
+      if (!groupedData[key]) {
+        groupedData[key] = { F: 0, M: 0, date };
       }
-      groupedData[month][item.sexo] += 1;
+      groupedData[key][item.sexo] += 1;
     });
 
     return groupedData;
@@ -24,15 +26,19 @@ const DengueBarChart = ({ data }) => {
 
   useEffect(() => {
     const groupedData = processData(data);
-    const categories = Object.keys(groupedData).sort((a, b) => new Date(a) - new Date(b));
+    const sortedKeys = Object.keys(groupedData).sort();
+    const categories = sortedKeys.map(key => {
+      const date = groupedData[key].date;
+      return date.toLocaleString('default', { month: 'short', year: 'numeric' });
+    });
     const series = [
       {
         name: 'Femenino',
-        data: categories.map((month) => groupedData[month].F),
+        data: sortedKeys.map((key) => groupedData[key].F),
       },
       {
         name: 'Masculino',
-        data: categories.map((month) => groupedData[month].M),
+        data: sortedKeys.map((key) => groupedData[key].M),
       },
     ];
 
@@ -83,11 +89,11 @@ const DengueBarChart = ({ data }) => {
   return (
     <div id="chart">
       <Card align="center" direction="column" w="100%" >
-      <Flex align="center" w="100%" px="15px" py="10px">
-        <Text me="auto" fontSize="xl" fontWeight="700" lineHeight="100%">
-          Casos por género
-        </Text>
-      </Flex>
+        <Flex align="center" w="100%" px="15px" py="10px">
+          <Text me="auto" fontSize="xl" fontWeight="700" lineHeight="100%">
+            Casos por género
+          </Text>
+        </Flex>
         <Chart options={options} series={chartData.series} type="bar" height={400} />
       </Card>
     </div>

@@ -7,14 +7,14 @@ const ClimaChart = ({ data }) => {
     const porMes = {};
     datos.forEach(item => {
       const fecha = new Date(item.date);
-      const mesAnio = `${fecha.getFullYear()}-${fecha.getMonth() + 1}`;
+      const mesAnio = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;
       if (!porMes[mesAnio]) {
         porMes[mesAnio] = { tmax: [], tmin: [], tavg: [], prcp: [] };
       }
-      porMes[mesAnio].tmax.push(item.tmax);
-      porMes[mesAnio].tmin.push(item.tmin);
-      porMes[mesAnio].tavg.push(item.tavg);
-      porMes[mesAnio].prcp.push(item.prcp);
+      porMes[mesAnio].tmax.push(parseFloat(item.tmax));
+      porMes[mesAnio].tmin.push(parseFloat(item.tmin));
+      porMes[mesAnio].tavg.push(parseFloat(item.tavg));
+      porMes[mesAnio].prcp.push(parseFloat(item.prcp));
     });
 
     return Object.entries(porMes).map(([mesAnio, valores]) => ({
@@ -32,22 +32,22 @@ const ClimaChart = ({ data }) => {
     {
       name: 'Temperatura Máxima',
       type: 'line',
-      data: datosMensuales.map(item => item.tmax)
+      data: datosMensuales.map(item => parseFloat(item.tmax.toFixed(1)))
     },
     {
       name: 'Temperatura Mínima',
       type: 'line',
-      data: datosMensuales.map(item => item.tmin)
+      data: datosMensuales.map(item => parseFloat(item.tmin.toFixed(1)))
     },
     {
       name: 'Temperatura Promedio',
       type: 'line',
-      data: datosMensuales.map(item => item.tavg)
+      data: datosMensuales.map(item => parseFloat(item.tavg.toFixed(1)))
     },
     {
       name: 'Precipitación',
       type: 'column',
-      data: datosMensuales.map(item => item.prcp)
+      data: datosMensuales.map(item => parseFloat(item.prcp.toFixed(1)))
     }
   ];
 
@@ -71,7 +71,7 @@ const ClimaChart = ({ data }) => {
     },
     labels: datosMensuales.map(item => {
       const [year, month] = item.fecha.split('-');
-      return `${['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][parseInt(month) - 1]} '${year.slice(2)}`;
+      return `${['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][parseInt(month) - 1]} ${year}`;
     }),
     markers: {
       size: 0
