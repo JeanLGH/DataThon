@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Card,
-  CardHeader,
   CardBody,
   Heading,
   Text,
@@ -18,47 +17,29 @@ const AverageCard = ({ title, value, unit, icon, minTemp, maxTemp }) => {
 
   return (
     <Card
-      p={6}
-      shadow="xl"
+      p={3}
+      shadow="md"
       borderRadius="lg"
       bg={bgColor}
-      _hover={{ transform: "translateY(-5px)", boxShadow: "2xl" }}
-      transition="all 0.3s ease-in-out"
-      overflow="hidden"
-      position="relative"
+      _hover={{ transform: "translateY(-2px)", boxShadow: "md" }}
+      transition="all 0.2s ease-in-out"
     >
-      <Box
-        position="absolute"
-        top="-20px"
-        right="-20px"
-        width="100px"
-        height="100px"
-        borderRadius="full"
-        bg={useColorModeValue('teal.50', 'teal.900')}
-        opacity="0.2"
-      />
-      <CardHeader>
-        <Flex justify="space-between" align="center" mb={4}>
-          <Icon as={icon} w={8} h={8} color={accentColor} />
-          <Heading size="md" color={textColor}>{title}</Heading>
-        </Flex>
-      </CardHeader>
       <CardBody>
-        <Flex direction="column" align="center">
-          <Text fontSize="4xl" fontWeight="bold" color={accentColor}>
+        <Flex align="center" mb={2}>
+          <Icon as={icon} w={5} h={5} color={accentColor} mr={2} />
+          <Heading size="sm" color={textColor}>{title}</Heading>
+        </Flex>
+        <Flex justify="space-between" align="baseline">
+          <Text fontSize="2xl" fontWeight="bold" color={accentColor}>
             {value}
-            <Text as="span" fontSize="2xl" ml={1}>{unit}</Text>
+            <Text as="span" fontSize="md" ml={1}>{unit}</Text>
           </Text>
-          <Flex justify="space-between" width="100%" mt={4}>
-            <Box textAlign="center">
-              <Text fontSize="sm" color="gray.500">Mín</Text>
-              <Text fontSize="md" fontWeight="bold" color={textColor}>{minTemp}{unit}</Text>
-            </Box>
-            <Box textAlign="center">
-              <Text fontSize="sm" color="gray.500">Máx</Text>
-              <Text fontSize="md" fontWeight="bold" color={textColor}>{maxTemp}{unit}</Text>
-            </Box>
-          </Flex>
+          <Box textAlign="right">
+            <Text fontSize="xs" color="gray.500">Min / Max</Text>
+            <Text fontSize="sm" fontWeight="medium" color={textColor}>
+              {minTemp}{unit} / {maxTemp}{unit}
+            </Text>
+          </Box>
         </Flex>
       </CardBody>
     </Card>
