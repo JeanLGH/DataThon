@@ -1,3 +1,4 @@
+/**
 export const statesData = 
   {
   "type": "FeatureCollection",
@@ -149636,3 +149637,4 @@ export const statesData =
       }
     ]
 };
+ */
