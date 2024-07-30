@@ -1,20 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import Card from "../../../../components/card/Card.js";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 
 const HeatmapChart = ({ data }) => {
   const [chartOptions, setChartOptions] = useState({
     chart: {
       height: 350,
       type: 'heatmap',
+      toolbar: {
+        show: true,
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true
+        },
+      }
     },
     stroke: {
       width: 0
     },
     plotOptions: {
       heatmap: {
-        radius: 30,
+        radius: 7,
         enableShades: false,
         colorScale: {
           ranges: []
@@ -24,7 +36,8 @@ const HeatmapChart = ({ data }) => {
     dataLabels: {
       enabled: true,
       style: {
-        colors: ['#fff']
+        colors: ['#fff'],
+        fontSize: '10px'
       }
     },
     xaxis: {
@@ -32,13 +45,25 @@ const HeatmapChart = ({ data }) => {
         text: 'Días'
       },
       type: 'category',
-      categories: Array.from({ length: 31 }, (_, i) => i + 1)
+      categories: Array.from({ length: 31 }, (_, i) => i + 1),
+      labels: {
+        rotate: -45,
+        rotateAlways: false,
+        style: {
+          fontSize: '10px'
+        }
+      }
     },
     yaxis: {
       title: {
         text: 'Meses'
       },
-      categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+      categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      labels: {
+        style: {
+          fontSize: '10px'
+        }
+      }
     },
     tooltip: {
       enabled: true,
@@ -47,11 +72,21 @@ const HeatmapChart = ({ data }) => {
       },
       y: {
         formatter: function (value) {
-          return `${value}`;
+          return `${value}°C`;
         }
       }
     },
-   
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 800
+        },
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }]
   });
 
   const [chartSeries, setChartSeries] = useState([]);
@@ -67,10 +102,10 @@ const HeatmapChart = ({ data }) => {
       setChartSeries(series);
 
       const ranges = [
-        { from: 0, to: 0, color: '#CCCCCC' }, // Gris para valores 0
-        { from: min, to: 22.98, color: '#00E396' }, // Verde
-        { from: 22.99, to: 24.999, color: '#FEB019' }, // Amarillo
-        { from: 25.0, to: max, color: '#FF4560' } // Rojo
+        { from: 0, to: 0, color: '#CCCCCC' },
+        { from: min, to: 22.98, color: '#00E396' },
+        { from: 22.99, to: 24.999, color: '#FEB019' },
+        { from: 25.0, to: max, color: '#FF4560' }
       ];
 
       setChartOptions(prevOptions => ({
@@ -109,17 +144,21 @@ const HeatmapChart = ({ data }) => {
 
   return (
     <Card align="center" direction="column" w="100%">
-       <Flex align="center" w="100%" px="15px" py="10px">
+      <Flex align="center" w="100%" px="15px" py="10px">
         <Text me="auto" fontSize="xl" fontWeight="700" lineHeight="100%">
           Mapa de Calor de la Temperatura Promedio
         </Text>
       </Flex>
-      <Chart
-        options={chartOptions}
-        series={chartSeries}
-        type="heatmap"
-        height={350}
-      />
+      <Box overflowX="auto" w="100%">
+        <Box minWidth="800px">
+          <Chart
+            options={chartOptions}
+            series={chartSeries}
+            type="heatmap"
+            height={350}
+          />
+        </Box>
+      </Box>
     </Card>
   );
 };
