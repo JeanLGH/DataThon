@@ -33,6 +33,11 @@ const MotionBox = motion(Box);
 const FeatureBox = ({ title, icon, description, linkTo }) => {
     const navigate = useNavigate();
 
+    const handleExplorationClick = () => {
+        navigate('/datathon/clima');
+    };
+
+
     const handleClick = () => {
         if (linkTo) {
             if (linkTo.startsWith('http')) {
@@ -117,6 +122,12 @@ const PrincipalDashboard = () => {
         autoplay: true,
         autoplaySpeed: 3000,
     };
+    const navigate = useNavigate();
+
+    const handleExplorationClick = () => {
+        navigate('/datathon/clima');
+    };
+
 
     return (
         <Box>
@@ -230,6 +241,8 @@ const PrincipalDashboard = () => {
                         textOverflow="ellipsis"
                         whiteSpace="nowrap"
                         overflow="hidden"
+                        onClick={handleExplorationClick}  // Añade esta línea
+                        
                     >
                         Comenzar Exploración
                     </Button>

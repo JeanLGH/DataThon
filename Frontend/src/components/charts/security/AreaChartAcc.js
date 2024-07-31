@@ -11,10 +11,10 @@ const ClimaChart = ({ data }) => {
       if (!porMes[mesAnio]) {
         porMes[mesAnio] = { tmax: [], tmin: [], tavg: [], prcp: [] };
       }
-      if (item.tmax !== undefined) porMes[mesAnio].tmax.push(item.tmax);
-      if (item.tmin !== undefined) porMes[mesAnio].tmin.push(item.tmin);
-      if (item.tavg !== undefined) porMes[mesAnio].tavg.push(item.tavg);
-      if (item.prcp !== undefined) porMes[mesAnio].prcp.push(item.prcp);
+      if (item.tmax !== undefined && item.tmax !== null) porMes[mesAnio].tmax.push(Number(item.tmax));
+      if (item.tmin !== undefined && item.tmin !== null) porMes[mesAnio].tmin.push(Number(item.tmin));
+      if (item.tavg !== undefined && item.tavg !== null) porMes[mesAnio].tavg.push(Number(item.tavg));
+      if (item.prcp !== undefined && item.prcp !== null) porMes[mesAnio].prcp.push(Number(item.prcp));
     });
 
     return Object.entries(porMes).map(([mesAnio, valores]) => ({
@@ -28,22 +28,26 @@ const ClimaChart = ({ data }) => {
 
   const datosMensuales = agruparPorMes(data).sort((a, b) => a.fecha.localeCompare(b.fecha));
 
+  const formatValue = (value) => {
+    return value !== null && value !== undefined ? parseFloat(value.toFixed(1)) : null;
+  };
+
   const series = [
     {
       name: 'Temperatura Máxima',
-      data: datosMensuales.map(item => parseFloat(item.tmax.toFixed(1)))
+      data: datosMensuales.map(item => formatValue(item.tmax))
     },
     {
       name: 'Temperatura Mínima',
-      data: datosMensuales.map(item => parseFloat(item.tmin.toFixed(1)))
+      data: datosMensuales.map(item => formatValue(item.tmin))
     },
     {
       name: 'Temperatura Promedio',
-      data: datosMensuales.map(item => parseFloat(item.tavg.toFixed(1)))
+      data: datosMensuales.map(item => formatValue(item.tavg))
     },
     {
       name: 'Precipitación',
-      data: datosMensuales.map(item => parseFloat(item.prcp.toFixed(1)))
+      data: datosMensuales.map(item => formatValue(item.prcp))
     }
   ];
 
@@ -81,7 +85,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value.toFixed(1);
+            return value !== null && value !== undefined ? value.toFixed(1) : 'N/A';
           }
         }
       },
@@ -92,7 +96,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value.toFixed(1);
+            return value !== null && value !== undefined ? value.toFixed(1) : 'N/A';
           }
         }
       }
@@ -102,6 +106,7 @@ const ClimaChart = ({ data }) => {
       intersect: false,
       y: {
         formatter: function (val, { seriesIndex }) {
+          if (val === null || val === undefined) return 'N/A';
           return seriesIndex === 3 ? val.toFixed(1) + " mm" : val.toFixed(1) + " °C";
         }
       }

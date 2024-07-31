@@ -62,7 +62,7 @@ const DengueBarChart = ({ data }) => {
       },
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
     },
     xaxis: {
       categories: chartData.categories,
@@ -83,7 +83,7 @@ const DengueBarChart = ({ data }) => {
         formatter: (val) => `${val} casos`,
       },
     },
-    colors: ['#0088FE', '#FF8042'],
+    colors: ['#7457D8', '#0088FE'],
   };
 
   return (

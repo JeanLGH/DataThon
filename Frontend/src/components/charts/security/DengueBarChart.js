@@ -75,7 +75,7 @@ const DengueBarChart = ({ data }) => {
         formatter: (val) => `${val} casos`,
       },
     },
-    colors: ['#0088FE', '#FF8042'],
+    colors: ['#7457D8', '#FF8042'],
   };
 
   return (
