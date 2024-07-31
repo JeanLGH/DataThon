@@ -33,11 +33,6 @@ const MotionBox = motion(Box);
 const FeatureBox = ({ title, icon, description, linkTo }) => {
     const navigate = useNavigate();
 
-    const handleExplorationClick = () => {
-        navigate('/datathon/clima');
-    };
-
-
     const handleClick = () => {
         if (linkTo) {
             if (linkTo.startsWith('http')) {
