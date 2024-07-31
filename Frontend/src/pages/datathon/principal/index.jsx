@@ -145,7 +145,7 @@ const PrincipalDashboard = () => {
                     justifyContent="center"
                 >
                     <VStack spacing={4}>
-                        <Heading color="white" size="2xl" textAlign="center">Dashboard de Clima y Dengue</Heading>
+                        <Heading color="white" size="2xl" textAlign="center">EcoSalud: Clima y Dengue</Heading>
                         <Text color="white" fontSize="xl" textAlign="center" maxWidth="800px">
                             Explora datos climáticos y casos de dengue con nuestro innovador modelo predictivo.
                         </Text>
