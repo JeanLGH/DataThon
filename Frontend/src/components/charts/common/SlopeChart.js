@@ -12,11 +12,11 @@ const SlopeChart = ({ data }) => {
     const series = [
       {
         name: 'Promedio Precipitación',
-        data: data.map(d => d.prcp !== null ? parseFloat(d.prcp.toFixed(2)) : null)
+        data: data.map(d => d.prcp != null ? parseFloat(Number(d.prcp).toFixed(2)) : null)
       },
       {
         name: 'Promedio Temperatura',
-        data: data.map(d => d.tavg !== null ? parseFloat(d.tavg.toFixed(2)) : null)
+        data: data.map(d => d.tavg != null ? parseFloat(Number(d.tavg).toFixed(2)) : null)
       }
     ];
 
@@ -43,14 +43,17 @@ const SlopeChart = ({ data }) => {
           title: {
             text: 'Precipitación (mm)'
           },
-          decimalsInFloat: 2
+          decimalsInFloat: 2,
+          forceNiceScale: true,
+          min: 0
         },
         {
           opposite: true,
           title: {
             text: 'Temperatura (°C)'
           },
-          decimalsInFloat: 2
+          decimalsInFloat: 2,
+          forceNiceScale: true
         }
       ],
       markers: {
@@ -61,7 +64,7 @@ const SlopeChart = ({ data }) => {
         intersect: false,
         y: {
           formatter: function (y, { seriesIndex }) {
-            if (y === null) return "Sin datos";
+            if (y == null) return "Sin datos";
             return `${y.toFixed(2)} ${seriesIndex === 0 ? 'mm' : '°C'}`;
           }
         }

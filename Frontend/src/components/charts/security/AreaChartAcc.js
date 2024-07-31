@@ -2,6 +2,7 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const ClimaChart = ({ data }) => {
+  // Función para agrupar datos por mes
   const agruparPorMes = (datos) => {
     const porMes = {};
     datos.forEach(item => {
@@ -18,10 +19,10 @@ const ClimaChart = ({ data }) => {
 
     return Object.entries(porMes).map(([mesAnio, valores]) => ({
       fecha: mesAnio,
-      tmax: valores.tmax.length ? valores.tmax.reduce((a, b) => a + b, 0) / valores.tmax.length : 0,
-      tmin: valores.tmin.length ? valores.tmin.reduce((a, b) => a + b, 0) / valores.tmin.length : 0,
-      tavg: valores.tavg.length ? valores.tavg.reduce((a, b) => a + b, 0) / valores.tavg.length : 0,
-      prcp: valores.prcp.length ? valores.prcp.reduce((a, b) => a + b, 0) : 0,
+      tmax: valores.tmax.length ? valores.tmax.reduce((a, b) => a + b, 0) / valores.tmax.length : null,
+      tmin: valores.tmin.length ? valores.tmin.reduce((a, b) => a + b, 0) / valores.tmin.length : null,
+      tavg: valores.tavg.length ? valores.tavg.reduce((a, b) => a + b, 0) / valores.tavg.length : null,
+      prcp: valores.prcp.length ? valores.prcp.reduce((a, b) => a + b, 0) : null,
     }));
   };
 
@@ -30,19 +31,19 @@ const ClimaChart = ({ data }) => {
   const series = [
     {
       name: 'Temperatura Máxima',
-      data: datosMensuales.map(item => parseFloat(item.tmax.toFixed(1)) || 0)
+      data: datosMensuales.map(item => parseFloat(item.tmax.toFixed(1)))
     },
     {
       name: 'Temperatura Mínima',
-      data: datosMensuales.map(item => parseFloat(item.tmin.toFixed(1)) || 0)
+      data: datosMensuales.map(item => parseFloat(item.tmin.toFixed(1)))
     },
     {
       name: 'Temperatura Promedio',
-      data: datosMensuales.map(item => parseFloat(item.tavg.toFixed(1)) || 0)
+      data: datosMensuales.map(item => parseFloat(item.tavg.toFixed(1)))
     },
     {
       name: 'Precipitación',
-      data: datosMensuales.map(item => parseFloat(item.prcp.toFixed(1)) || 0)
+      data: datosMensuales.map(item => parseFloat(item.prcp.toFixed(1)))
     }
   ];
 
@@ -80,7 +81,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value !== undefined ? value.toFixed(1) : '0.0';
+            return value.toFixed(1);
           }
         }
       },
@@ -91,7 +92,7 @@ const ClimaChart = ({ data }) => {
         },
         labels: {
           formatter: function (value) {
-            return value !== undefined ? value.toFixed(1) : '0.0';
+            return value.toFixed(1);
           }
         }
       }
@@ -101,7 +102,7 @@ const ClimaChart = ({ data }) => {
       intersect: false,
       y: {
         formatter: function (val, { seriesIndex }) {
-          return seriesIndex === 3 ? (val !== undefined ? val.toFixed(1) + " mm" : '0.0 mm') : (val !== undefined ? val.toFixed(1) + " °C" : '0.0 °C');
+          return seriesIndex === 3 ? val.toFixed(1) + " mm" : val.toFixed(1) + " °C";
         }
       }
     },

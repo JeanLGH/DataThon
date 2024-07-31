@@ -23,16 +23,15 @@ export default function TotalNacimientos({ nacimientosData, selectedYear, handle
   };
 
   // Filtrar y preparar datos agrupados para el gráfico   
-  const chartData = Object.entries(groupDataByMonth(nacimientosData))
-    .map(([monthIndex, values]) => ({
-      month: values.month,
-      monthIndex: parseInt(monthIndex),
-      prcp: values.prcp.reduce((acc, curr) => acc + curr, 0) / values.prcp.length,
-      tavg: values.tavg.reduce((acc, curr) => acc + curr, 0) / values.tavg.length
-    }))
-    .sort((a, b) => a.monthIndex - b.monthIndex) // Ordenar por índice del mes
-    .map(({ month, prcp, tavg }) => ({ month, prcp, tavg })); // Eliminar monthIndex del resultado final
-
+const chartData = Object.entries(groupDataByMonth(nacimientosData))
+  .map(([monthIndex, values]) => ({
+    month: values.month,
+    monthIndex: parseInt(monthIndex),
+    prcp: values.prcp.length > 0 ? values.prcp.reduce((acc, curr) => acc + curr, 0) / values.prcp.length : null,
+    tavg: values.tavg.length > 0 ? values.tavg.reduce((acc, curr) => acc + curr, 0) / values.tavg.length : null
+  }))
+  .sort((a, b) => a.monthIndex - b.monthIndex)
+  .map(({ month, prcp, tavg }) => ({ month, prcp, tavg }));
   return (
     <Card align="center" direction="column" w="100%" {...rest}>
       <Flex align="center" w="100%" px="15px" py="10px">
