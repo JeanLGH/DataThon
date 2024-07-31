@@ -207,7 +207,7 @@ const PrincipalDashboard = () => {
                             <SectionItem icon={FaThermometerHalf} text="Temperaturas diarias y promedios" />
                             <SectionItem icon={WiRaindrops} text="Niveles de precipitación" />
                             <SectionItem icon={WiDayCloudy} text="Condiciones climáticas generales" />
-                            <SectionItem icon={FaInfoCircle} text="Fuente de datos: IDEAM 2023" />
+                            <SectionItem icon={FaInfoCircle} text="Fuente de datos: IDEAM 2023 - Cali" />
                         </VStack>
                     </Box>
                     <Box bg={useColorModeValue('gray.50', 'gray.700')} p={6} borderRadius="lg">
@@ -216,7 +216,7 @@ const PrincipalDashboard = () => {
                             <SectionItem icon={FaHospital} text="Casos de hospitalización" />
                             <SectionItem icon={FaChartLine} text="Evolución de síntomas en el tiempo" />
                             <SectionItem icon={FaVenusMars} text="Distribución de casos por género" />
-                            <SectionItem icon={FaInfoCircle} text="Fuente de datos: SIVIGILA 2023" />
+                            <SectionItem icon={FaInfoCircle} text="Fuente de datos: SIVIGILA 2023 - Cali" />
                         </VStack>
                     </Box>
                 </SimpleGrid>

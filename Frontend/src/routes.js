@@ -5,7 +5,6 @@ import { GiAmberMosquito } from 'react-icons/gi';
 import { FaChartLine} from 'react-icons/fa';
 import Clima from "./pages/datathon/clima";
 import Dengue from "./pages/datathon/dengue";
-import Modelo from "./pages/datathon/modelo";
 import Principal from "./pages/datathon/principal";
 
 const routes = [
